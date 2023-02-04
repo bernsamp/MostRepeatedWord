@@ -3,22 +3,18 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
 
-        try{
-            mostRepeatedWord();
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
+            FileReader file = new FileReader(".idea/TextFiles/RickAndMortyPilot.txt");
 
-        try {
+            File file2 = new File(".idea/TextFiles/RickAndMortyPilot.txt");
+
+            mostRepeatedWord(file);
+            numberOfWords(file2);
             specificWord();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-            throw new RuntimeException(e);
-        }
+
     }
-    public static void mostRepeatedWord() throws IOException {
+    public static void mostRepeatedWord(FileReader file) throws IOException {
 
         String line;
         String word = "";
@@ -27,8 +23,6 @@ public class Main {
         ArrayList<String> wordsList = new ArrayList<>();
 
         // Copy the Absolute Path or Content Root Path of the file you want to read
-
-        FileReader file = new FileReader(".idea/TextFiles/RickAndMortyPilot.txt");
 
         BufferedReader br = new BufferedReader(file);
 
@@ -49,13 +43,13 @@ public class Main {
                 word = wordsList.get(i);
             }
         }
-        System.out.println("\nThe most repeated word in the given .txt file is: " + word + " with " + maxCount + " occurrences.");
+        System.out.println("\nThe most repeated word in the given .txt file is: \"" + word + "\" with " + maxCount + " occurrences.");
         br.close();
     }
 
     public static void specificWord() throws FileNotFoundException {
 
-        System.out.println("\nWrite a word to check the number of occurences:");
+        System.out.println("\nWrite a word to see the number of occurrences:");
 
         Scanner sc = new Scanner(System.in);
 
@@ -73,6 +67,25 @@ public class Main {
                 wordCount++;
             }
         }
-        System.out.println("The word " + word + " appears " + wordCount + " times.");
+        System.out.println("The word \"" + word + "\" appears " + wordCount + " times.");
     }
-}
+
+    public static void numberOfWords(File file) throws IOException {
+
+            int wordCount = 0;
+
+            FileReader fr = new FileReader(file);
+
+            BufferedReader br = new BufferedReader(fr);
+
+            String str;
+
+            while((str=br.readLine())!=null)
+            {
+               String[] words = str.split(" ");
+                wordCount += words.length;
+            }
+            br.close();
+            System.out.println("\nNumber of words in the file: " + wordCount);
+        }
+    }
