@@ -11,6 +11,7 @@ public class Main {
 
             mostRepeatedWord(file);
             numberOfWords(file2);
+            numberOfUniqueWords(file2);
             specificWord();
 
     }
@@ -88,4 +89,33 @@ public class Main {
             br.close();
             System.out.println("\nNumber of words in the file: " + wordCount);
         }
+
+    public static void numberOfUniqueWords(File file) throws IOException {
+
+        FileReader fr = new FileReader(file);
+
+        BufferedReader br = new BufferedReader(fr);
+
+        String str = br.readLine();
+
+        String[] words = str.split(" ");
+
+        boolean[] array = new boolean[words.length];
+
+        int count = 0;
+
+        for (int i = 0; i < words.length; i++) {
+            if (!array[i]){
+                count++;
+
+                for (int j = i + 1; j < words.length; j++){
+                    if (words[j].compareTo(words[i]) == 0) {
+                        array[j] = true;
+                        count--;
+                    }
+                }
+            }
+        }
+        System.out.println("\nThe number of distinct words in the file is: " + count);
     }
+}
