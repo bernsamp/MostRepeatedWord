@@ -13,6 +13,7 @@ public class Main {
             numberOfWords(file2);
             numberOfUniqueWords(file2);
             specificWord();
+            charOccurrence(file2);
 
     }
     public static void mostRepeatedWord(FileReader file) throws IOException {
@@ -117,5 +118,29 @@ public class Main {
             }
         }
         System.out.println("\nThe number of distinct words in the file is: " + count);
+    }
+
+    public  static void charOccurrence(File file) throws IOException {
+
+        FileReader fr = new FileReader(file);
+
+        BufferedReader br = new BufferedReader(fr);
+
+        String fileString = String.valueOf(br.readLine().toCharArray());
+
+        System.out.println("\nInsert a character to check the number of occurrences: ");
+
+        Scanner scanner = new Scanner(System.in);
+
+        char character = scanner.next().charAt(0);
+        int count = 0;
+
+        for (int i = 0; i < fileString.length(); i++) {
+            if (fileString.charAt(i) == character) {
+                count++;
+            }
+        }
+        System.out.println("The character \"" + character + "\" appears " + count + " times.");
+
     }
 }
